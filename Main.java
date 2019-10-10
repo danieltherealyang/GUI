@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class Main{
     public Main(){
@@ -10,7 +11,7 @@ public class Main{
     public void frame(){
         frame = new JFrame("Portfolio");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(400,400));
+        frame.setSize(new Dimension(600,400));
         frame.setLocationRelativeTo(null);
         
         JMenuItem monkeyJump, pigLatin, palindrome, shorthand;
@@ -50,17 +51,52 @@ public class Main{
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Enter numbers to add");
         JTextField field = new JTextField(15);
+        field.addKeyListener(new KeyAdapter() //field accept numbers only
+            {
+                public void keyTyped(KeyEvent ke)
+                {
+                 char c = ke.getKeyChar();
+                    if(!Character.isDigit(c) && (c != '\b'))
+                    {
+                        ke.consume();
+                    }
+                }
+                public void keyReleased(KeyEvent e){}
+                public void keyPressed(KeyEvent e){}
+            });
         JButton enter = new JButton("Enter");
+        JButton equals = new JButton("Equals");
+        JTextArea area = new JTextArea();
+        area.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        area.setEditable(false);
+        
+        ArrayList<Integer> numList = new ArrayList<>();
         enter.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                String numbers = field.getText();
+                String fieldnumber = field.getText();
+                field.setText("");
+                int num = Integer.parseInt(fieldnumber);
+                numList.add(num);
+                area.append(num + " " + "+" + " ");
             }
         });
         
+        equals.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                int sum = 0;
+                for (int i : numList){
+                    sum = sum + i;
+                }
+                String StrSum = Integer.toString(sum);
+                area.append('\b' + '\b' + StrSum);
+            }
+        });
         panel.add(label);
         panel.add(field);
         panel.add(enter);
+        panel.add(equals);
         frame.getContentPane().add(BorderLayout.SOUTH, panel);
+        frame.add(area);
         frame.setVisible(true);
     }
     
