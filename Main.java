@@ -66,6 +66,7 @@ public class Main{
             });
         JButton enter = new JButton("Enter");
         JButton equals = new JButton("Equals");
+        JButton New = new JButton("New");
         JTextArea area = new JTextArea();
         area.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         area.setEditable(false);
@@ -88,13 +89,25 @@ public class Main{
                     sum = sum + i;
                 }
                 String StrSum = Integer.toString(sum);
-                area.append('\b' + '\b' + StrSum);
+                String result = area.getText().substring(0,area.getText().length() - 2);
+                area.setText(result);
+                area.append(" = " + StrSum);
+                field.setEditable(false);
+            }
+        });
+        
+        New.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                area.setText("");
+                field.setEditable(true);
+                field.setText("");
             }
         });
         panel.add(label);
         panel.add(field);
         panel.add(enter);
         panel.add(equals);
+        panel.add(New);
         frame.getContentPane().add(BorderLayout.SOUTH, panel);
         frame.add(area);
         frame.setVisible(true);
