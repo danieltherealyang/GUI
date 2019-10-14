@@ -98,6 +98,7 @@ public class Main{
         
         New.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                numList.clear();
                 area.setText("");
                 field.setEditable(true);
                 field.setText("");
