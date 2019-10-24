@@ -2,30 +2,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-
 public class Calculator {
-    public void add(){
-        Main main = new Main();
-        main.getFrame();
+    JFrame frame;
+    public void add() {
+        frame = new JFrame("Portfolio");                 
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);    
+        frame.setSize(new Dimension(700,400));
+        frame.setLocationRelativeTo(null);
+        
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Enter numbers to add");
         JTextField field = new JTextField(15);
-        field.addKeyListener(new KeyAdapter() //field accept numbers only
-            {
-                public void keyTyped(KeyEvent ke)
-                {
-                 char c = ke.getKeyChar();
-                    if(!Character.isDigit(c) && (c != '\b'))
-                    {
-                        ke.consume();
-                    }
-                }
-                public void keyReleased(KeyEvent e){}
-                public void keyPressed(KeyEvent e){}
-            });
+        KeyListener keyListener = new KeyListener();
+        keyListener.DigitOnly(field);
+        
+             
         JButton enter = new JButton("Enter");
         JButton equals = new JButton("Equals");
         JButton New = new JButton("New");
+        
         JTextArea area = new JTextArea();
         area.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         area.setEditable(false);
@@ -38,9 +33,9 @@ public class Calculator {
                 int num = Integer.parseInt(fieldnumber);
                 numList.add(num);
                 area.append(num + " " + "+" + " ");
-            }
+            }                    
         });
-        
+         
         equals.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 int sum = 0;
@@ -68,33 +63,28 @@ public class Calculator {
         panel.add(enter);
         panel.add(equals);
         panel.add(New);
-        main.getFrame().add(BorderLayout.SOUTH, panel);
-        main.getFrame().add(area);
-        main.getFrame().setVisible(true);
+        frame.getContentPane().add(BorderLayout.SOUTH, panel);
+        frame.add(area);
+        frame.setVisible(true);
     }
     
     public void subtract() {
-        Main main = new Main();
-        main.getFrame();
+        frame = new JFrame("Portfolio");                 
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);    
+        frame.setSize(new Dimension(700,400));
+        frame.setLocationRelativeTo(null);
+        
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Enter numbers to subtract");
         JTextField field = new JTextField(15);
-        field.addKeyListener(new KeyAdapter() //field accept numbers only
-            {
-                public void keyTyped(KeyEvent ke)
-                {
-                 char c = ke.getKeyChar();
-                    if(!Character.isDigit(c) && (c != '\b'))
-                    {
-                        ke.consume();
-                    }
-                }
-                public void keyReleased(KeyEvent e){}
-                public void keyPressed(KeyEvent e){}
-            });
+        KeyListener keyListener = new KeyListener();
+        keyListener.DigitOnly(field);
+        
+             
         JButton enter = new JButton("Enter");
         JButton equals = new JButton("Equals");
         JButton New = new JButton("New");
+        
         JTextArea area = new JTextArea();
         area.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         area.setEditable(false);
@@ -107,9 +97,9 @@ public class Calculator {
                 int num = Integer.parseInt(fieldnumber);
                 numList.add(num);
                 area.append(num + " " + "-" + " ");
-            }
+            }                    
         });
-        
+         
         equals.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 int sum = 2 * numList.get(0);
@@ -137,9 +127,8 @@ public class Calculator {
         panel.add(enter);
         panel.add(equals);
         panel.add(New);
-        main.getFrame().add(BorderLayout.SOUTH, panel);
-        main.getFrame().add(area);
-        main.getFrame().setVisible(true);
+        frame.getContentPane().add(BorderLayout.SOUTH, panel);
+        frame.add(area);
+        frame.setVisible(true);
     }
-    
 }
