@@ -22,6 +22,12 @@ public class GUI {
         JMenuItem palindromeRev, palindromeRec, palindromeIJ;
         JMenuItem add, subtract, multiply;
         monkeyJump = new JMenuItem("Monkey Jumpers");
+        monkeyJump.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                MonkeyJumpers monkeyJumpers = new MonkeyJumpers();
+                monkeyJumpers.add();
+            }
+        });
         calculator = new JMenu("Calculator");
             add = new JMenuItem("Add");
             add.addActionListener(new ActionListener() {
